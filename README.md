@@ -351,13 +351,13 @@ Todos son correctos. Lo importante no es el número exacto sino que sea **varios
 **P1.** Ejecutá `wc -l programa.i` y escribí el número de líneas que obtenés.
 
 <!-- Completá la línea siguiente con el número exacto (solo dígitos, sin espacios): -->
-LINEAS_I=224
+LINEAS_I=2247
 
 ¿Por qué ese número es tan mayor que las 94 líneas de `programa.c`?
 
-> **R:** 
+> **R:**Porque el preprocesador expande los #include, agregando el contenido completo de las librerías como stdio.h, lo que aumenta mucho la cantidad de líneas. También se expanden macros y se eliminan comentarios.
 
-Porque el preprocesador expande los #include, agregando el contenido completo de las librerías como stdio.h, lo que aumenta mucho la cantidad de líneas. También se expanden macros y se eliminan comentarios.
+
 
 #### Herramienta: `grep`
 
@@ -394,13 +394,11 @@ grep "Archivo fuente principal" programa.i   # no debe encontrar nada
 ¿El comando encuentra algo o no devuelve nada?
 
 <!-- Completá con SI (si encontró algo) o NO (si no encontró nada): -->
-COMENTARIOS_EN_I=NO 
+COMENTARIOS_EN_I=NO
 
 ¿Por qué ocurre eso?
 
-> **R:**
-
-Porque el preprocesador elimina los comentarios antes de la compilación.
+> **R:**Porque el preprocesador elimina los comentarios antes de la compilación.
 
 #### Observación 2: Las macros se expanden
 
@@ -485,7 +483,7 @@ gcc -E -DDEBUG programa.c | grep "Iniciando"
 Respondé SI o NO:
 
 <!-- Completá con SI o NO: -->
-DEBUG_ACTIVA_CODIGO=SI 
+DEBUG_ACTIVA_CODIGO=SI
 
 ---
 
@@ -508,9 +506,7 @@ grep -n "stdio.h" programa.i | head -5
 
 ¿Qué información comunican esas líneas `# N "archivo"`? ¿De qué archivo proviene el bloque que contiene la declaración de `printf`?
 
-> **R:**
-
-Las líneas indican el archivo origen y la línea dentro de ese archivo desde donde se insertó el código durante el preprocesamiento. Permiten al compilador y al debugger rastrear de qué archivo proviene cada parte del código.
+> **R:**Las líneas indican el archivo origen y la línea dentro de ese archivo desde donde se insertó el código durante el preprocesamiento. Permiten al compilador y al debugger rastrear de qué archivo proviene cada parte del código.
 
 El bloque que contiene la declaración de printf proviene del archivo stdio.h de la biblioteca estándar del sistema (en este caso ubicado en C:/msys64/ucrt64/include/stdio.h).
 
@@ -690,7 +686,7 @@ movl    %edx, 24(%rbp)
 Explicá en términos generales qué hacen esas instrucciones
 (usá los comentarios del laboratorio como guía):
 
-> **R:** Se guarda el estado del stack, se establecen los parámetros de la función en memoria y se preparan los registros para operar con ellos dentro de la función.
+> **R:**Se guarda el estado del stack, se establecen los parámetros de la función en memoria y se preparan los registros para operar con ellos dentro de la función.
 
 ---
 
@@ -993,7 +989,7 @@ Quedan algunos `U` incluso en el ejecutable final. ¿Por qué? Son funciones de 
 
 **P14.** Ejecutá `nm programa | grep "^ *U"` y copiá la salida.
 
-> **R:** U _end_
+> **R:**U _end_
 
 ¿Quedan símbolos de tipo `U` en el ejecutable final?
 Respondé SI o NO:
@@ -1003,7 +999,7 @@ SIMBOLOS_U_FINAL=SI
 
 ¿Por qué quedan? ¿Quién los resuelve y cuándo?
 
-> **R:** Quedan porque son símbolos de la biblioteca estándar del sistema (runtime). No se resuelven en el enlazado estático del programa, sino en tiempo de ejecución por el cargador dinámico del sistema operativo.
+> **R:**Quedan porque son símbolos de la biblioteca estándar del sistema (runtime). No se resuelven en el enlazado estático del programa, sino en tiempo de ejecución por el cargador dinámico del sistema operativo.
 
 ---
 
